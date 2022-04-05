@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Card } from './components/Card';
+import ReactCSSTransitionGroup from 'react-transition-group'; 
+
 
 function App() {
+
+  const [cssClass, setCssClass] = useState<string>('');
+
+  const onFlip = () => {
+    setCssClass(cssClass === 'card-flip' ? '' : 'card-flip');
+    setTimeout(() => setCssClass(''), 1000)
+  }
+
+  const onOwnershipFlip = () => {
+    setCssClass(cssClass === 'card-ownership-flip' ? '' : 'card-ownership-flip');
+    setTimeout(() => setCssClass(''), 1000)
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {/* <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
+
+
+    </ReactCSSTransitionGroup> */}
+
+
+    <Card cssClass={cssClass} />
+    
+    <button onClick={onFlip}>Flip</button>
+    <button onClick={onOwnershipFlip}>Ownership Flip</button>
+    </>
   );
 }
 
