@@ -1,10 +1,10 @@
 
 
-export const Card = (props: {cssClass: string}) => {
+export const Card = () => {
 
     return (
         <div className="card-container">
-            <div className={`card ${props.cssClass}`}>
+            <div className={`card`}>
                 <div className="card-inner">
                 <div className="card-front">
                     FRONT
