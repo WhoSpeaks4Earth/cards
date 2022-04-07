@@ -9,13 +9,16 @@ import { ICardDeck } from './models/ICardDeck';
 
 function App() {
 
-  const [cardCss, setCardCss] = useState('face-down');
+  const FACE_UP_DEFAULT = '';
+  const [cardCss, setCardCss] = useState(FACE_UP_DEFAULT);
+  const deck: ICardDeck = cardDecks[0];
 
-  const flipCardOver = () => {
-    setCardCss(cardCss === 'face-down' ? 'face-up' : 'face-down');
+  const do180Flip = () => {
+    let newCss = isFaceUp() ? 'face-down' : 'face-up';
+    setCardCss(newCss);
   }
 
-  const deck: ICardDeck = cardDecks[0];
+  const isFaceUp = () => cardCss.includes('face-up') || cardCss === FACE_UP_DEFAULT;
 
   return (
       <Layout>
@@ -24,11 +27,10 @@ function App() {
         </SidePanel>
 
         <MainContent>
-          <div onClick={flipCardOver}>
           <Card card={deck.cards[0]} cssClass={cardCss} theme={deck.theme} />
-          </div>
           <br />
-          <button onClick={flipCardOver}>Flip</button>
+          <button onClick={do180Flip}>180 Flip</button>
+          {/* <button onClick={doOwnershipFlip}>Ownership Flip</button> */}
         </MainContent>
         
 
