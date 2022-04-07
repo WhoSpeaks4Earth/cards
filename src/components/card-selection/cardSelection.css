@@ -1,0 +1,11 @@
+
+.card-selection {
+    display: flex;
+    flex-direction: column;
+}
+
+.cards-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

@@ -4,7 +4,7 @@ import { ICardTheme } from '../../models/ICardTheme';
 import './card.css';
 
 
-export const Card = (props: {card: ICard, cssClass: string, theme: ICardTheme}) => {
+export const Card = (props: {card: ICard, cssClass?: string, theme: ICardTheme}) => {
 
     const getFrontStyle = () => ({
         backgroundImage: props.theme.frontImg,
@@ -13,7 +13,7 @@ export const Card = (props: {card: ICard, cssClass: string, theme: ICardTheme}) 
     const getBackStyle = () => ({backgroundImage: props.theme.backImg});
 
     return (
-        <div className={'card ' + props.cssClass}>
+        <div className={'card ' + (props.cssClass ? props.cssClass : '')}>
             <div className='back'
                 style={getBackStyle()}>
                 <div className='front'
