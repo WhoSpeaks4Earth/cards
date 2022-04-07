@@ -3,18 +3,20 @@
 .card {
     border: 1px solid gray;
     border-radius: 12px;
-    
+    -webkit-box-shadow: 5px 5px 15px -3px #000000; 
+    box-shadow: 5px 5px 15px -3px #000000;
     height: 400px;
     width: 300px;
     font-size: 32px;
-    font-family: fantasy;
+    overflow: hidden;
 }
 
 .back {
     border-radius: inherit;
     height: 100%;
     width: 100%;
-    background-color: red;
+    background-image: url('https://t3.ftcdn.net/jpg/02/42/23/48/360_F_242234871_lTmbXUInbzADDLHrCH9LLHnWZqxg8AEk.jpg');
+    background-size: cover;
 }
 
 .front {
@@ -25,7 +27,7 @@
     height: 100%;
     width: 100%;
     background-color: gray;
-    opacity: 1; /* set to 0 to show "back" of card */
+    opacity: 1;
 }
 
 
@@ -46,24 +48,4 @@
     font-size: .8em;
     font-weight: lighter;
     margin: .8em;
-}
-
-
-.ranks {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25%;
-    font-family: cursive;
-    font-size: 1em;
-    font-weight: normal;
-    padding: 6px;
-}
-.ranks > div {
-    line-height: 1em;
-}
-.ranks > div:nth-child(2) {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
 }

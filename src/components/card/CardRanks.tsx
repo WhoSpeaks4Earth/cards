@@ -1,5 +1,5 @@
 import { rank, ranks } from '../../models/ICard';
-import './card.css';
+import './ranks.css';
 
 
 export const CardRanks = (props: {ranks: ranks}) => {
