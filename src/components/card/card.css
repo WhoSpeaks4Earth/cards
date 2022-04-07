@@ -1,7 +1,6 @@
 
 
 .card {
-    border: 1px solid gray;
     border-radius: 12px;
     -webkit-box-shadow: 5px 5px 15px -3px #000000; 
     box-shadow: 5px 5px 15px -3px #000000;
@@ -15,7 +14,6 @@
     border-radius: inherit;
     height: 100%;
     width: 100%;
-    background-image: url('https://t3.ftcdn.net/jpg/02/42/23/48/360_F_242234871_lTmbXUInbzADDLHrCH9LLHnWZqxg8AEk.jpg');
     background-size: cover;
 }
 
@@ -26,8 +24,8 @@
     border-radius: inherit;
     height: 100%;
     width: 100%;
-    background-color: gray;
     opacity: 1;
+    background-size: cover;
 }
 
 

@@ -5,6 +5,8 @@ import { Layout } from './components/layout/Layout';
 import { MainContent } from './components/layout/MainContent';
 import { SidePanel } from './components/layout/SidePanel';
 import { useState } from 'react';
+import { ICardTheme } from './models/ICardDeck';
+import { SpaceCatTheme } from './data/themes';
 
 const sampleCard: ICard = {title: 'Tesla', ranks: [2,4,9,10]}
 
@@ -16,6 +18,8 @@ function App() {
     setFlipCard(!flipCard);
   }
 
+  const theme: ICardTheme = SpaceCatTheme;
+
   return (
       <Layout>
         <SidePanel>
@@ -23,7 +27,7 @@ function App() {
         </SidePanel>
 
         <MainContent>
-          <Card card={sampleCard} shouldFaceUp={flipCard} />
+          <Card card={sampleCard} shouldFaceUp={flipCard} theme={theme} />
           <br />
           <button onClick={flipCardOver}>Flip</button>
         </MainContent>
