@@ -7,6 +7,7 @@
     width: 150px;
     font-size: 26px;
     overflow: hidden;
+    margin: 8px;
 }
 
 .back {
@@ -40,7 +41,7 @@
 
 .title {
     font-family: 'Franklin Gothic Lighter', 'Arial Narrow', Arial, sans-serif;
-    font-size: .8em;
+    font-size: .7em;
     font-weight: lighter;
     margin: .8em;
 }

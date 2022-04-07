@@ -19,15 +19,15 @@ export const cardDecks: ICardDeck[] = [
             },
             {
                 title: "IBM",
-                ranks: [8, 7, 10, 9]
+                ranks: [6, 5, 7, 7]
             },
             {
                 title: "Microsoft",
-                ranks: [8, 7, 10, 9]
+                ranks: [7, 9, 5, 10]
             },
             {
                 title: "Apple",
-                ranks: [8, 7, 10, 9]
+                ranks: [10, 8, 8, 5]
             },
         ],
         theme: StocksTheme
