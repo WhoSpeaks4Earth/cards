@@ -1,7 +1,7 @@
 import { CardRanks } from './CardRanks';
 import { ICard } from '../../models/ICard';
 import './card.css';
-import { ICardTheme } from '../../models/ICardDeck';
+import { ICardTheme } from '../../models/ICardTheme';
 
 
 export const Card = (props: {card: ICard, shouldFaceUp: boolean, theme: ICardTheme}) => {

@@ -1,12 +1,7 @@
 import { ICard } from "./ICard";
+import { ICardTheme } from "./ICardTheme";
 
-export interface ICardTheme {
-    backImg: string,
-    frontImg: string
-    fontColor: 'black' | 'white'
-}
-
-export interface CardDeck {
+export interface ICardDeck {
     name: string,
     cards: ICard[],
     theme: ICardTheme

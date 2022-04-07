@@ -1,4 +1,4 @@
-import { ICardTheme } from "../models/ICardDeck";
+import { ICardTheme } from "../models/ICardTheme";
 
 export const StocksTheme: ICardTheme = {
     backImg: "url('https://moneydoneright.com/wp-content/uploads/2018/03/Build-Wealth-Outside-the-Stock-Market.png')",
