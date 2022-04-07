@@ -17,13 +17,22 @@
 
 .layout > div {
     flex: 1;
+}
+
+.layout > .main {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: lightgray;
+}
+
+
+.side-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: gray;
-}
-
-.layout > .main {
-    flex: 3;
 }

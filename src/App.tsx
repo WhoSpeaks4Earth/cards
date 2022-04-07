@@ -1,20 +1,29 @@
 
 
-import { Layout } from './components/Layout';
+import { Board } from './components/board/Board';
+import { Layout } from './components/layout/Layout';
+import { MainContent } from './components/layout/MainContent';
+import { SidePanel } from './components/layout/SidePanel';
 
 
 
 function App() {
 
   return (
-    <>
       <Layout>
-        <div>left panel</div>
-        <div>board</div>
-        <div>right panel</div>
-        <div>footer bar</div>
+        <SidePanel>
+          left side
+        </SidePanel>
+
+        <MainContent>
+          <Board />
+        </MainContent>
+        
+
+        <SidePanel>
+          right side
+        </SidePanel>
       </Layout>
-    </>
   );
 }
 
