@@ -1,4 +1,3 @@
-import { Card } from './components/card/Card';
 import { Layout } from './components/layout/Layout';
 import { MainContent } from './components/layout/MainContent';
 import { SidePanel } from './components/layout/SidePanel';
@@ -6,26 +5,16 @@ import { useState } from 'react';
 import { cardDecks } from './data/card-decks';
 import { ICardDeck } from './models/ICardDeck';
 import { CardSelection } from './components/card-selection/CardSelection';
+import { CardHand } from './components/card-hand/CardHand';
+import { ICard } from './models/ICard';
 
 
 function App() {
 
-  const FACE_UP_DEFAULT = '';
-  const [cardCss, setCardCss] = useState(FACE_UP_DEFAULT);
   const deck: ICardDeck = cardDecks[1];
+  const [playerHand, setPlayerHand] = useState<ICard[]>([]);
 
-  const do180Flip = () => {
-    let newCss = isFaceUp() ? 'face-down' : 'face-up';
-    setCardCss(newCss);
-  }
-
-  const isFaceUp = () => cardCss.includes('face-up') || cardCss === FACE_UP_DEFAULT;
-
-
-
-  const onCardClick = () => {
-    console.log('card clicked');
-  }
+  const onCardClick = (card: ICard) => setPlayerHand([...playerHand, card]);
 
   return (
       <Layout>
@@ -34,15 +23,11 @@ function App() {
         </SidePanel>
 
         <MainContent>
-          {/* <Card card={deck.cards[0]} cssClass={cardCss} theme={deck.theme} />
-          <br />
-          <button onClick={do180Flip}>180 Flip</button> */}
-          <CardSelection deck={deck} onCardClick={onCardClick} />
+          <CardSelection deck={deck} onCardClick={(card: ICard) => onCardClick(card)} />
         </MainContent>
         
-
         <SidePanel>
-          right side
+          <CardHand cards={playerHand} theme={deck.theme} />
         </SidePanel>
       </Layout>
   );

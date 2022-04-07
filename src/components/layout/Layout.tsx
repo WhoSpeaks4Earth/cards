@@ -9,15 +9,9 @@ export const Layout = (props: { children: ReactChild[] }) => {
     return (
         <div className="layout-container">
             <div className="layout">
-                <div>
-                    {leftSide}
-                </div>
-                <div className="main">
-                    {main}
-                </div>
-                <div>
-                    {rightSide}
-                </div>
+                {leftSide}
+                {main}
+                {rightSide}
             </div>
         </div>
     )
