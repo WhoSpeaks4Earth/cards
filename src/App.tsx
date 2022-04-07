@@ -1,5 +1,4 @@
 import { Card } from './components/card/Card';
-import { ICard } from './models/ICard';
 import { Layout } from './components/layout/Layout';
 import { MainContent } from './components/layout/MainContent';
 import { SidePanel } from './components/layout/SidePanel';
@@ -10,10 +9,10 @@ import { ICardDeck } from './models/ICardDeck';
 
 function App() {
 
-  const [flipCard, setFlipCard] = useState(true);
+  const [cardCss, setCardCss] = useState('face-down');
 
   const flipCardOver = () => {
-    setFlipCard(!flipCard);
+    setCardCss(cardCss === 'face-down' ? 'face-up' : 'face-down');
   }
 
   const deck: ICardDeck = cardDecks[0];
@@ -25,7 +24,9 @@ function App() {
         </SidePanel>
 
         <MainContent>
-          <Card card={deck.cards[0]} shouldFaceUp={flipCard} theme={deck.theme} />
+          <div onClick={flipCardOver}>
+          <Card card={deck.cards[0]} cssClass={cardCss} theme={deck.theme} />
+          </div>
           <br />
           <button onClick={flipCardOver}>Flip</button>
         </MainContent>

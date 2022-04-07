@@ -1,5 +1,4 @@
 
-
 .card {
     border-radius: 12px;
     -webkit-box-shadow: 5px 5px 15px -3px #000000; 
@@ -24,10 +23,8 @@
     border-radius: inherit;
     height: 100%;
     width: 100%;
-    opacity: 1;
     background-size: cover;
 }
-
 
 .header {
     display: flex;
@@ -46,4 +43,42 @@
     font-size: .8em;
     font-weight: lighter;
     margin: .8em;
+}
+
+
+
+
+
+
+/* ANIMATIONS */
+.face-up {
+    animation: face-up 1s forwards;
+}
+.face-up .front {
+    opacity: 1;
+    transition: opacity 1s;
+}
+@keyframes face-up {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}
+
+.face-down {
+    animation: face-down 1s forwards;
+}
+.face-down .front {
+    opacity: 0;
+    transition: opacity 1s;
+}
+@keyframes face-down {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(180deg);
+    }
 }

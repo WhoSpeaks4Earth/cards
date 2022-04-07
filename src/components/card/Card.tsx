@@ -1,20 +1,19 @@
 import { CardRanks } from './CardRanks';
 import { ICard } from '../../models/ICard';
-import './card.css';
 import { ICardTheme } from '../../models/ICardTheme';
+import './card.css';
 
 
-export const Card = (props: {card: ICard, shouldFaceUp: boolean, theme: ICardTheme}) => {
+export const Card = (props: {card: ICard, cssClass: string, theme: ICardTheme}) => {
 
     const getFrontStyle = () => ({
         backgroundImage: props.theme.frontImg,
-        color: props.theme.fontColor,
-        opacity: props.shouldFaceUp ? '1' : '0'
+        color: props.theme.fontColor
     });
     const getBackStyle = () => ({backgroundImage: props.theme.backImg});
 
     return (
-        <div className='card'>
+        <div className={'card ' + props.cssClass}>
             <div className='back'
                 style={getBackStyle()}>
                 <div className='front'
