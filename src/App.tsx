@@ -10,11 +10,18 @@ import { ICard } from './models/ICard';
 
 
 function App() {
-
   const deck: ICardDeck = cardDecks[1];
   const [playerHand, setPlayerHand] = useState<ICard[]>([]);
+  const MAX_CARDS_PER_HAND = 5;
 
-  const onCardClick = (card: ICard) => setPlayerHand([...playerHand, card]);
+  const onCardClick = (card: ICard) => {
+    const existingCardIndex = playerHand.findIndex(c => c.title === card.title);
+    const doesExistInHand = existingCardIndex >= 0;
+    if (doesExistInHand)
+      setPlayerHand(playerHand.filter(c => c.title !== card.title))
+    else if (playerHand.length < MAX_CARDS_PER_HAND && !doesExistInHand)
+      setPlayerHand([...playerHand, card]);
+  }
 
   return (
       <Layout>
@@ -23,7 +30,7 @@ function App() {
         </SidePanel>
 
         <MainContent>
-          <CardSelection deck={deck} onCardClick={(card: ICard) => onCardClick(card)} />
+          <CardSelection deck={deck} playerHand={playerHand} maxCards={MAX_CARDS_PER_HAND} onCardClick={(card: ICard) => onCardClick(card)} />
         </MainContent>
         
         <SidePanel>

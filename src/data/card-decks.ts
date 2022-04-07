@@ -29,6 +29,22 @@ export const cardDecks: ICardDeck[] = [
                 title: "Apple",
                 ranks: [10, 8, 8, 5]
             },
+            {
+                title: "Johnson & Johnson",
+                ranks: [8, 7, 10, 9]
+            },
+            {
+                title: "Costco",
+                ranks: [6, 5, 7, 7]
+            },
+            {
+                title: "Visa",
+                ranks: [7, 9, 5, 10]
+            },
+            {
+                title: "Honeywell",
+                ranks: [10, 8, 8, 5]
+            },
         ],
         theme: StocksTheme
     }
