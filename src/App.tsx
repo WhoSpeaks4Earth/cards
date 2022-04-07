@@ -10,7 +10,7 @@ import { ICard } from './models/ICard';
 
 
 function App() {
-  const deck: ICardDeck = cardDecks[1];
+  const deck: ICardDeck = cardDecks[0];
   const [playerHand, setPlayerHand] = useState<ICard[]>([]);
   const MAX_CARDS_PER_HAND = 5;
 
@@ -31,6 +31,7 @@ function App() {
 
         <MainContent>
           <CardSelection deck={deck} playerHand={playerHand} maxCards={MAX_CARDS_PER_HAND} onCardClick={(card: ICard) => onCardClick(card)} />
+          <button disabled={playerHand.length < MAX_CARDS_PER_HAND}>Start Round</button>
         </MainContent>
         
         <SidePanel>

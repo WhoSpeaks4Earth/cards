@@ -4,10 +4,40 @@ import { SpaceCatTheme, StocksTheme } from "./themes";
 export const cardDecks: ICardDeck[] = [
     {
         name: "Space Cat",
-        cards: [{
-            title: "Some Cat",
-            ranks: [5, 7, 3, 9]
-        }],
+        cards: [
+            {
+                title: "Smokey",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Ashes",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Stinky",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "TyGuy",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Charles",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Frank",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Sum Cat",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Cat5",
+                ranks: [5, 7, 3, 9]
+            },
+        ],
         theme: SpaceCatTheme
     },
     {
