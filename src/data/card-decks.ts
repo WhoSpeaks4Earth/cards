@@ -3,6 +3,44 @@ import { SpaceCatTheme, StocksTheme } from "./themes";
 
 export const cardDecks: ICardDeck[] = [
     {
+        name: "Astronomy",
+        cards: [
+            {
+                title: "Black Hole",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "White Dwarf",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Ptolemy",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Carl Sagan",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Huugens",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Amromeda",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Milky Way",
+                ranks: [5, 7, 3, 9]
+            },
+            {
+                title: "Kepler",
+                ranks: [5, 7, 3, 9]
+            },
+        ],
+        theme: SpaceCatTheme
+    },
+    {
         name: "Space Cat",
         cards: [
             {
