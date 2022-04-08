@@ -1,14 +1,14 @@
 
 .card-selection {
-    flex: 6;
+    flex: 4;
     background-color: gray;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     padding: 20px;
 }
 
 .cards-list {
-    flex: 6;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;

@@ -39,36 +39,27 @@ function App() {
   return (
       <Layout>
         <MainContent>
-          { view === 'select' ? (
-              <>
-                <CardSelection
-                  deck={deck}
-                  playerHand={playerHand}
-                  maxCards={MAX_CARDS_PER_HAND} 
-                  onCardClick={(card: ICard) => onCardClick(card)}
-                  onStartRoundClick={() => setViewState('game')} />
-                <SidePanel>
-                  <CardHand cards={playerHand} theme={deck.theme} />
-                </SidePanel>
-              </>
+          <GameTable>
+            { view === 'select' ? (
+              <CardSelection
+                deck={deck}
+                playerHand={playerHand}
+                maxCards={MAX_CARDS_PER_HAND} 
+                onCardClick={(card: ICard) => onCardClick(card)}
+                onStartRoundClick={() => setViewState('game')} />
             ) : (
               <>
-              <GameTable>
                 <SidePanel>
                   <CardHand cards={playerHand} theme={deck.theme} />
                 </SidePanel>
                 <Board board={{}} />
-                <SidePanel>
-                  <CardHand cards={playerHand} theme={deck.theme} />
-                </SidePanel>
-              </GameTable>
-              {/* <button onClick={() => setViewState('select')}>Reset</button> */}
               </>
-          )}
-          
+            )}
+            <SidePanel>
+              <CardHand cards={playerHand} theme={deck.theme} />
+            </SidePanel>
+          </GameTable>
         </MainContent>
-        
-        
       </Layout>
   );
 }
