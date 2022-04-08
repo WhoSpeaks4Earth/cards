@@ -40,17 +40,17 @@ function App() {
       <Layout>
         <MainContent>
           { view === 'select' ? (
-            <>
+              <>
                 <CardSelection
                   deck={deck}
                   playerHand={playerHand}
                   maxCards={MAX_CARDS_PER_HAND} 
                   onCardClick={(card: ICard) => onCardClick(card)}
                   onStartRoundClick={() => setViewState('game')} />
-                  <SidePanel>
-                    <CardHand cards={playerHand} theme={deck.theme} />
-                  </SidePanel>
-                </>
+                <SidePanel>
+                  <CardHand cards={playerHand} theme={deck.theme} />
+                </SidePanel>
+              </>
             ) : (
               <>
               <GameTable>
@@ -62,7 +62,7 @@ function App() {
                   <CardHand cards={playerHand} theme={deck.theme} />
                 </SidePanel>
               </GameTable>
-              <button onClick={() => setViewState('select')}>Reset</button>
+              {/* <button onClick={() => setViewState('select')}>Reset</button> */}
               </>
           )}
           

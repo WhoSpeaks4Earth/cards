@@ -38,7 +38,7 @@ export const cardDecks: ICardDeck[] = [
                 ranks: [5, 7, 3, 9]
             },
         ],
-        theme: SpaceCatTheme
+        theme: StocksTheme
     },
     {
         name: "Space Cat",
