@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import "./layout.css"
 
 
 export const SidePanel = (props: { children: ReactNode }) => {

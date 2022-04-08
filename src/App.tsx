@@ -8,6 +8,7 @@ import { CardSelection } from './components/card-selection/CardSelection';
 import { CardHand } from './components/card-hand/CardHand';
 import { ICard } from './models/ICard';
 import { Board } from './components/board/Board';
+import { GameTable } from './components/game-table/GameTable';
 
 
 function App() {
@@ -37,29 +38,37 @@ function App() {
 
   return (
       <Layout>
-        <SidePanel>
-          <CardHand cards={playerHand} theme={deck.theme} />
-        </SidePanel>
-
         <MainContent>
           { view === 'select' ? (
+            <>
                 <CardSelection
                   deck={deck}
                   playerHand={playerHand}
                   maxCards={MAX_CARDS_PER_HAND} 
                   onCardClick={(card: ICard) => onCardClick(card)}
                   onStartRoundClick={() => setViewState('game')} />
+                  <SidePanel>
+                    <CardHand cards={playerHand} theme={deck.theme} />
+                  </SidePanel>
+                </>
             ) : (
               <>
+              <GameTable>
+                <SidePanel>
+                  <CardHand cards={playerHand} theme={deck.theme} />
+                </SidePanel>
                 <Board board={{}} />
-                <button onClick={() => setViewState('select')}>Reset</button>
+                <SidePanel>
+                  <CardHand cards={playerHand} theme={deck.theme} />
+                </SidePanel>
+              </GameTable>
+              <button onClick={() => setViewState('select')}>Reset</button>
               </>
           )}
+          
         </MainContent>
         
-        <SidePanel>
-          <CardHand cards={playerHand} theme={deck.theme} />
-        </SidePanel>
+        
       </Layout>
   );
 }

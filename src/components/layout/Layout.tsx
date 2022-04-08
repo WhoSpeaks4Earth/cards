@@ -2,17 +2,13 @@ import { ReactChild }  from "react";
 import './layout.css';
 
 
-export const Layout = (props: { children: ReactChild[] }) => {
+export const Layout = (props: { children: ReactChild}) => {
 
-    const [leftSide, main, rightSide] = props.children;
+    const main = props.children;
 
     return (
         <div className="layout-container">
-            <div className="layout">
-                {leftSide}
-                {main}
-                {rightSide}
-            </div>
+            {main}
         </div>
     )
 }

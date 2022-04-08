@@ -1,42 +1,25 @@
 
 
 .layout-container {
-    display: flex;
-    align-items: stretch;
-    max-width: 1200px;
-    margin: auto;
-    height: 100vh;
+    max-width: 1400px;
+    margin: 2vh auto;
+    height: 95vh;
+    border: 3px solid black;
 }
 
-.layout {
+.main {
     display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: aliceblue;
-}
-
-.layout > div {
-    flex: 1;
-}
-
-.layout > .main {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     height: 100%;
-    width: 100%;
-    background-color: lightgray;
-    padding: 20px;
 }
 
 
 .side-panel {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: aliceblue;
     height: 100%;
+    padding: 30px;
 }
