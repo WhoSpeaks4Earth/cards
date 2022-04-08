@@ -4,7 +4,7 @@ import { Card } from "../card/Card"
 import "./cardSelection.css"
 
 
-export const CardSelection = (props: {deck: ICardDeck, playerHand: ICard[], maxCards: number, onCardClick: any}) => {
+export const CardSelection = (props: {deck: ICardDeck, playerHand: ICard[], maxCards: number, onCardClick: any, onStartRoundClick: any}) => {
 
     const getCss = (card: ICard): string => {
         const existingCard = props.playerHand.find(c => c.title === card.title);
@@ -27,6 +27,13 @@ export const CardSelection = (props: {deck: ICardDeck, playerHand: ICard[], maxC
                     </div>
                 ))}
             </div>
+
+            <button
+                disabled={props.playerHand.length < props.maxCards}
+                onClick={props.onStartRoundClick}
+                className='primary-btn'>
+                Start Round
+            </button>
         </div>
     )
 }

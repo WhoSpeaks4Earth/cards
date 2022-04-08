@@ -1,18 +1,26 @@
 import { Layout } from './components/layout/Layout';
 import { MainContent } from './components/layout/MainContent';
 import { SidePanel } from './components/layout/SidePanel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cardDecks } from './data/card-decks';
 import { ICardDeck } from './models/ICardDeck';
 import { CardSelection } from './components/card-selection/CardSelection';
 import { CardHand } from './components/card-hand/CardHand';
 import { ICard } from './models/ICard';
+import { Board } from './components/board/Board';
 
 
 function App() {
   const deck: ICardDeck = cardDecks[0];
+  const [view, setView] = useState<'select' | 'game'>(() => 'select');
   const [playerHand, setPlayerHand] = useState<ICard[]>([]);
   const MAX_CARDS_PER_HAND = 5;
+
+  useEffect(() => {
+    if (view === 'select')
+      setPlayerHand([]);
+  }, [view]);
+
 
   const onCardClick = (card: ICard) => {
     const existingCardIndex = playerHand.findIndex(c => c.title === card.title);
@@ -23,15 +31,30 @@ function App() {
       setPlayerHand([...playerHand, card]);
   }
 
+  const setViewState = (view: 'select' | 'game') => {
+    setView(view);
+  }
+
   return (
       <Layout>
         <SidePanel>
-          left side
+          <CardHand cards={playerHand} theme={deck.theme} />
         </SidePanel>
 
         <MainContent>
-          <CardSelection deck={deck} playerHand={playerHand} maxCards={MAX_CARDS_PER_HAND} onCardClick={(card: ICard) => onCardClick(card)} />
-          <button disabled={playerHand.length < MAX_CARDS_PER_HAND}>Start Round</button>
+          { view === 'select' ? (
+                <CardSelection
+                  deck={deck}
+                  playerHand={playerHand}
+                  maxCards={MAX_CARDS_PER_HAND} 
+                  onCardClick={(card: ICard) => onCardClick(card)}
+                  onStartRoundClick={() => setViewState('game')} />
+            ) : (
+              <>
+                <Board board={{}} />
+                <button onClick={() => setViewState('select')}>Reset</button>
+              </>
+          )}
         </MainContent>
         
         <SidePanel>

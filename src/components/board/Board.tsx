@@ -1,10 +1,13 @@
+import { IBoard } from '../../models/IBoard';
+import './board.css';
 
-
-export const Board = () => {
+export const Board = (props: {board: IBoard}) => {
 
     return (
-        <div>
-            board!
+        <div className="board">
+            {
+
+            }
         </div>
     )
 }
