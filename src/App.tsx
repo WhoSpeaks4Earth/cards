@@ -39,7 +39,7 @@ function App() {
   return (
       <Layout>
         <MainContent>
-          <GameTable>
+          <GameTable theme={deck.theme.table}>
             { view === 'select' ? (
               <CardSelection
                 deck={deck}
@@ -49,14 +49,14 @@ function App() {
                 onStartRoundClick={() => setViewState('game')} />
             ) : (
               <>
-                <SidePanel>
-                  <CardHand cards={playerHand} theme={deck.theme} />
+                <SidePanel theme={deck.theme.panel}>
+                  <CardHand cards={playerHand} theme={deck.theme.card} />
                 </SidePanel>
                 <Board board={{}} />
               </>
             )}
-            <SidePanel>
-              <CardHand cards={playerHand} theme={deck.theme} />
+            <SidePanel theme={deck.theme.panel}>
+              <CardHand cards={playerHand} theme={deck.theme.card} />
             </SidePanel>
           </GameTable>
         </MainContent>

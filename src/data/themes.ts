@@ -1,4 +1,5 @@
 import { ICardTheme } from "../models/ICardTheme";
+import { IGameTableTheme } from "../models/IGameTableTheme";
 
 export const StocksTheme: ICardTheme = {
     backImg: "url('https://moneydoneright.com/wp-content/uploads/2018/03/Build-Wealth-Outside-the-Stock-Market.png')",
@@ -12,4 +13,8 @@ export const SpaceCatTheme: ICardTheme = {
     frontImg: "url('https://media.istockphoto.com/photos/old-scratched-film-strip-grunge-texture-background-picture-id1273852653?k=20&m=1273852653&s=612x612&w=0&h=nE1dAChXLNazvJpbwUFR40RLbLJoWTaLYnn1raN3OEI=')",
     bgColor: "black",
     fontColor: "white"
+}
+
+export const SpaceTableTheme: IGameTableTheme = {
+    bgColor: "#333",
 }

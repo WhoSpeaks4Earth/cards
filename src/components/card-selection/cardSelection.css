@@ -1,7 +1,7 @@
 
 .card-selection {
     flex: 4;
-    background-color: gray;
+    background: transparent;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

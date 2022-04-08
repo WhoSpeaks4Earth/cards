@@ -23,7 +23,7 @@ export const CardSelection = (props: {deck: ICardDeck, playerHand: ICard[], maxC
             <div className="cards-list">
                 {props.deck.cards.map(card => (
                     <div key={card.title} onClick={() => props.onCardClick(card)}>
-                        <Card card={card} cssClass={getCss(card)} theme={props.deck.theme} />
+                        <Card card={card} cssClass={getCss(card)} theme={props.deck.theme.card} />
                     </div>
                 ))}
             </div>

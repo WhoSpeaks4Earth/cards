@@ -1,8 +1,9 @@
 import { ICard } from "./ICard";
 import { ICardTheme } from "./ICardTheme";
+import { IGameTableTheme, IPanelTheme } from "./IGameTableTheme";
 
 export interface ICardDeck {
     name: string,
     cards: ICard[],
-    theme: ICardTheme
+    theme: {card: ICardTheme, table: IGameTableTheme, panel: IPanelTheme}
 }
