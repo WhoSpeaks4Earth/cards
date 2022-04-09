@@ -7,6 +7,6 @@ export const SidePanel = (props: { children: ReactNode, theme: IPanelTheme }) =>
 
 
     return (
-        <div className="side-panel" style={{backgroundColor: props.theme.bgColor}}>{props.children}</div>
+        <div className="side-panel" style={{background: props.theme.bgColor}}>{props.children}</div>
     )
 }

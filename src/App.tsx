@@ -10,9 +10,7 @@ import { ICard } from './models/ICard';
 import { Board } from './components/board/Board';
 import { GameTable } from './components/game-table/GameTable';
 import { DeckSelection } from './components/selection/deck-selection/DeckSelection';
-import { Selection } from './components/selection/Selection';
 import { gameView, IGame } from './models/IGame';
-import { SelectionHeader } from './components/selection/selection-header/SelectionHeader';
 
 
 function App() {
@@ -42,31 +40,16 @@ function App() {
   const renderView = (view: gameView): any => {
     switch(view) {
       case 'select-deck':
-        return (
-          <Selection>
-            <MainContent>
-              <SelectionHeader title='Select a deck' />
-              <DeckSelection decks={cardDecks} onDeckSelected={(deck: ICardDeck) => onDeckSelected(deck)} />
-            </MainContent>
-          </Selection>
-        )
+        return <DeckSelection decks={cardDecks} onDeckSelected={(deck: ICardDeck) => onDeckSelected(deck)} />
+
       case 'select-cards':
-        return (
-          <Selection>
-            <MainContent>
-              <SelectionHeader title={game.deck.name} />
-              <CardSelection
-                deck={game.deck}
-                playerHand={playerHand}
-                maxCards={MAX_CARDS_PER_HAND} 
-                onCardClick={(card: ICard) => onCardClick(card)}
-                onStartRoundClick={onStartRound} />
-            </MainContent>
-            <SidePanel theme={game.deck.theme.panel}>
-              <CardHand cards={playerHand} theme={game.deck.theme.card} />
-            </SidePanel>
-          </Selection>
-        )
+        return <CardSelection
+                  deck={game.deck}
+                  playerHand={playerHand}
+                  maxCards={MAX_CARDS_PER_HAND} 
+                  onCardClick={(card: ICard) => onCardClick(card)}
+                  onStartRoundClick={onStartRound} />
+
         case 'active-game':
           return (
             <GameTable theme={game.deck.theme.table}>

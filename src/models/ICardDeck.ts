@@ -4,6 +4,7 @@ import { IGameTableTheme, IPanelTheme } from "./IGameTableTheme";
 
 export interface ICardDeck {
     name: string,
+    description: string,
     cards: ICard[],
     theme: {card: ICardTheme, table: IGameTableTheme, panel: IPanelTheme}
 }

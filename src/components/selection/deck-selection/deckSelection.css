@@ -2,6 +2,12 @@
 
 .deck-selection {
     flex: 6;
-    background-color: cadetblue;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ccc;
+}
+
+.decks-list {
+    height: 85vh;
+    overflow-y: scroll;
 }

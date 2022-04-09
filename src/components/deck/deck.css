@@ -1,0 +1,28 @@
+
+.deck {
+    display: flex;
+    padding: 20px;
+    margin: 2rem;
+    border: 1px solid black;
+}
+
+.deck:hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 15px -3px #1c07a1;
+    position: relative;
+    top: 3px;
+    right: 3px;
+}
+
+.description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ranks-description {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}

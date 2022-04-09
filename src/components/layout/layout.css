@@ -4,21 +4,17 @@
     max-width: 1400px;
     margin: 2vh auto;
     height: 95vh;
-    border: 3px solid black;
+    overflow: hidden;
 }
 
 .main {
     flex: 4;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
-
 
 .side-panel {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    height: 95vh;
 }

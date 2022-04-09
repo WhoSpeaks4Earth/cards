@@ -1,13 +1,19 @@
 
 .card-selection {
     flex: 4;
-    background: transparent;
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 100%;
-    background-color: red;
+    background-color: #ccc;
+}
+
+.left-side {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 95vh;
 }
 
 .cards-list {

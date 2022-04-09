@@ -5,9 +5,7 @@ export const Board = (props: {board: IBoard}) => {
 
     return (
         <div className="board">
-            {
-
-            }
+            board
         </div>
     )
 }

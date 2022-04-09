@@ -6,8 +6,15 @@ export const DeckSelection = (props: {decks: ICardDeck[], onDeckSelected: any}) 
 
     return (
         <div className="deck-selection">
-            <div onClick={() => props.onDeckSelected(props.decks[0])}>
-                <Deck />
+            <h1 style={{marginLeft: '2rem'}}>Select a deck</h1>
+            <div className="decks-list">
+                {
+                    props.decks.map(deck => (
+                        <div key={deck.name} onClick={() => props.onDeckSelected(deck)}>
+                            <Deck deck={deck} />
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )
