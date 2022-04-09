@@ -3,9 +3,9 @@
     display: flex;
     padding: 20px;
     margin: 2rem;
-    border: 1px solid black;
     overflow-y: hidden;
     background-color: #eee;
+    box-shadow: 5px 5px 15px -3px #333;
 }
 
 .deck:hover {

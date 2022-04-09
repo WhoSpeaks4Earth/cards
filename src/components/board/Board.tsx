@@ -17,7 +17,7 @@ export const Board = (props: {board: IBoard, cardTheme: ICardTheme}) => {
                                     return card ? <Card key={`${xIndex}${yIndex}`} card={card} theme={props.cardTheme} /> :
                                     (
                                         <div key={`${xIndex}${yIndex}`} className="cell">
-                                            {xIndex}, {yIndex}
+                                            {/* {xIndex}, {yIndex} */}
                                         </div>
                                     )                                    
                                 })
@@ -28,7 +28,7 @@ export const Board = (props: {board: IBoard, cardTheme: ICardTheme}) => {
             </div>
 
             <div className="status-panel">
-                status panel
+                {/* status panel */}
             </div>
         </div>
     )
