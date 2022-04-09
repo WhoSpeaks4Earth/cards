@@ -11,6 +11,8 @@ import { Board } from './components/board/Board';
 import { GameTable } from './components/game-table/GameTable';
 import { DeckSelection } from './components/selection/deck-selection/DeckSelection';
 import { gameView, IGame } from './models/IGame';
+import { BoardService } from './services/board.service';
+import { IBoard } from './models/IBoard';
 
 
 function App() {
@@ -18,9 +20,13 @@ function App() {
   const [playerHand, setPlayerHand] = useState<ICard[]>([]);
   const MAX_CARDS_PER_HAND = 5;
 
+  const boardService = new BoardService();
+  const board: IBoard = boardService.createBoard(3,3);
+  board.cells[0][0] = {card: {title: "test", ranks: [1,1,1,1]}};
+
 
   useEffect(() => {
-    const decks = cardDecks; // todo: get from service
+    const decks = cardDecks;
     setGame({...game, deck: decks[0]})
   }, []);
 
@@ -56,7 +62,8 @@ function App() {
               <SidePanel theme={game.deck.theme.panel}>
                 <CardHand cards={playerHand} theme={game.deck.theme.card} />
               </SidePanel>
-              <Board board={{}} />
+              {/* theme should not be part of deck... */}
+              <Board board={board} cardTheme={game.deck.theme.card} />
               <SidePanel theme={game.deck.theme.panel}>
                 <CardHand cards={playerHand} theme={game.deck.theme.card} />
               </SidePanel>
