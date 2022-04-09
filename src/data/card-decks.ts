@@ -4,7 +4,8 @@ import { SpaceCatTheme, SpaceTableTheme, SpaceTheme, StocksTheme } from "./theme
 export const cardDecks: ICardDeck[] = [
     {
         name: "Solar System",
-        description: "A card deck that includes objects from our Solar System. Objects are ranked in categories of mass, size, material, and speed.",
+        categories: ["educational"],
+        description: "Notable objects from our Solar System. Objects are ranked in categories of mass, size, material, and speed.",
         cards: [
             {
                 title: "Jupiter",
@@ -43,7 +44,8 @@ export const cardDecks: ICardDeck[] = [
     },
     {
         name: "Space Cat",
-        description: "A card deck of cats in space. These cat-dets are ranked in categories of fiestiness, cuddliness, purr, and fur.",
+        categories: ["silly"],
+        description: "Cats in space. These cat-dets are ranked in categories of fiestiness, cuddliness, purr, and fur.",
         cards: [
             {
                 title: "The Fuzz",
@@ -82,7 +84,8 @@ export const cardDecks: ICardDeck[] = [
     },
     {
         name: "Stocks",
-        description: "A card deck including most of the companies in the S&P 500. Stay familiar with current stock performance of companies, updated quarterly. Acheive the strongest cards and see how they change over time!",
+        categories: ["current-events", "educational"],
+        description: "Includes the top performing companies in the S&P 500. Card ranks are updated quarterly based on company performance. Acheive the strongest cards and see how they change over time!",
         cards: [
             {
                 title: "Tesla",
@@ -114,6 +117,46 @@ export const cardDecks: ICardDeck[] = [
             },
             {
                 title: "Honeywell",
+                ranks: [10, 8, 8, 5]
+            },
+        ],
+        theme: {card: StocksTheme, table: SpaceTableTheme, panel: {bgColor: "rgba(0,0,0,0.5)"} }
+    },
+    {
+        name: "March Madness",
+        categories: ["current-events", "sports"],
+        description: "Stay up-to-date with team performances. Card ranks updated nightly.",
+        cards: [
+            {
+                title: "Kansas",
+                ranks: [8, 7, 10, 9]
+            },
+            {
+                title: "UNC",
+                ranks: [6, 5, 7, 7]
+            },
+            {
+                title: "Duke",
+                ranks: [7, 9, 5, 10]
+            },
+            {
+                title: "Villanova",
+                ranks: [10, 8, 8, 5]
+            },
+            {
+                title: "Saint Peters",
+                ranks: [8, 7, 10, 9]
+            },
+            {
+                title: "Arkansas",
+                ranks: [6, 5, 7, 7]
+            },
+            {
+                title: "Miami",
+                ranks: [7, 9, 5, 10]
+            },
+            {
+                title: "Michigan",
                 ranks: [10, 8, 8, 5]
             },
         ],

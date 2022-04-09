@@ -3,6 +3,13 @@ import { GAME_SETTINGS } from "../data/game-settings";
 
 export class DealerService {
 
+    static #getRandomRange(range: number) {
+      const randomNum = Math.floor(Math.random() * 10);
+      return randomNum % 2 === 0
+        ? (Math.floor(Math.random() * range)) 
+        : (Math.floor(Math.random() * (-1 * range)))
+    }
+
     static getCardDealStyles (): CSSProperties[] {
         const styles: CSSProperties[] = [];
     
@@ -10,7 +17,8 @@ export class DealerService {
           styles.push({
             position: 'relative',
             top: (-100 * i),
-            left: (i % 2 === 0 ? (Math.floor(Math.random() * 20)) : (Math.floor(Math.random() * -20)))
+            left: DealerService.#getRandomRange(20),
+            transform: `rotateZ(${DealerService.#getRandomRange(2)}deg)`
         })
     
         return styles;

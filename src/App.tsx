@@ -27,8 +27,6 @@ function App() {
   board.cells[0][0] = {card: {title: "test", ranks: [1,1,1,1]}};
 
 
-
-
   useEffect(() => {
     const decks = cardDecks;
     setGame({...game, deck: decks[0]})
@@ -45,24 +43,18 @@ function App() {
 
   const onStartRound = () => setGame({...game, view: 'active-game'});
   const onDeckSelected = (deck: ICardDeck) => setGame({deck, view: 'select-cards'});
-  
-  
-  
-
 
   const renderView = (view: gameView): any => {
 
     switch(view) {
       case 'select-deck':
         return <DeckSelection decks={cardDecks} onDeckSelected={(deck: ICardDeck) => onDeckSelected(deck)} />
-
       case 'select-cards':
         return <CardSelection
                   deck={game.deck}
                   playerHand={playerHand}
                   onCardClick={(card: ICard) => onCardClick(card)}
                   onStartRoundClick={onStartRound} />
-
         case 'active-game':
           return (
             <GameTable theme={game.deck.theme.table}>
