@@ -5,7 +5,12 @@ export const Board = (props: {board: IBoard}) => {
 
     return (
         <div className="board">
-            board
+            <div className="board-cells">
+                board cells
+            </div>
+            <div className="board-status-panel">
+                status panel
+            </div>
         </div>
     )
 }
