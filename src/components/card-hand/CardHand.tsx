@@ -1,27 +1,17 @@
-import { ICard } from "../../models/ICard"
+import { ICardHand } from "../../models/ICardHand";
 import { ICardTheme } from "../../models/ICardTheme"
 import { Card } from "../card/Card"
 import './cardHand.css';
 
 
-export const CardHand = (props: {cards: ICard[], theme: ICardTheme}) => {
+export const CardHand = (props: {hand: ICardHand, theme: ICardTheme}) => {
 
     return (
         <div className="card-hand">
             {
-                props.cards.map((card, i) => (
-                    <div
-                        key={card.title + i} 
-                        style={{
-                            position: 'relative',
-                            top: (-100 * i),
-                            left: (i%2 === 0 ? (Math.floor(Math.random() * 20)) : (Math.floor(Math.random() * -20)))
-                        }
-                    }>
-                    <Card
-                        card={card} 
-                        theme={props.theme}
-                    />
+                props.hand.cards.map((card, i) => (
+                    <div key={card.title + i} style={props.hand.dealStyles[i]}>
+                        <Card card={card} theme={props.theme}/>
                     </div>
                 ))
             }

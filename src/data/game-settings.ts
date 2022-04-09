@@ -1,0 +1,6 @@
+
+export const GAME_SETTINGS = {
+    MAX_CARDS_PER_HAND: 5,
+    X_GRID_CELL_COUNT: 3,
+    Y_GRID_CELL_COUNT: 3
+}

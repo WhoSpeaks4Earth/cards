@@ -13,16 +13,20 @@ import { DeckSelection } from './components/selection/deck-selection/DeckSelecti
 import { gameView, IGame } from './models/IGame';
 import { BoardService } from './services/board.service';
 import { IBoard } from './models/IBoard';
+import { DealerService } from './services/dealer.service';
+import { GAME_SETTINGS } from './data/game-settings';
+import { ICardHand } from './models/ICardHand';
 
 
 function App() {
   const [game, setGame] = useState<IGame>({deck: cardDecks[0], view: 'select-deck'});
-  const [playerHand, setPlayerHand] = useState<ICard[]>([]);
-  const MAX_CARDS_PER_HAND = 5;
+  const [playerHand, setPlayerHand] = useState<ICardHand>(() => ({cards: [], dealStyles: DealerService.getCardDealStyles()}));
 
   const boardService = new BoardService();
   const board: IBoard = boardService.createBoard(3,3);
   board.cells[0][0] = {card: {title: "test", ranks: [1,1,1,1]}};
+
+
 
 
   useEffect(() => {
@@ -31,19 +35,23 @@ function App() {
   }, []);
 
   const onCardClick = (card: ICard) => {
-    const existingCardIndex = playerHand.findIndex(c => c.title === card.title);
+    const existingCardIndex = playerHand.cards.findIndex(c => c.title === card.title);
     const doesExistInHand = existingCardIndex >= 0;
     if (doesExistInHand)
-      setPlayerHand(playerHand.filter(c => c.title !== card.title))
-    else if (playerHand.length < MAX_CARDS_PER_HAND && !doesExistInHand)
-      setPlayerHand([...playerHand, card]);
+      setPlayerHand({...playerHand, cards: playerHand.cards.filter(c => c.title !== card.title)});
+    else if (playerHand.cards.length < GAME_SETTINGS.MAX_CARDS_PER_HAND && !doesExistInHand)
+      setPlayerHand({...playerHand, cards: [...playerHand.cards, card]});
   }
 
   const onStartRound = () => setGame({...game, view: 'active-game'});
   const onDeckSelected = (deck: ICardDeck) => setGame({deck, view: 'select-cards'});
+  
+  
+  
 
 
   const renderView = (view: gameView): any => {
+
     switch(view) {
       case 'select-deck':
         return <DeckSelection decks={cardDecks} onDeckSelected={(deck: ICardDeck) => onDeckSelected(deck)} />
@@ -52,7 +60,6 @@ function App() {
         return <CardSelection
                   deck={game.deck}
                   playerHand={playerHand}
-                  maxCards={MAX_CARDS_PER_HAND} 
                   onCardClick={(card: ICard) => onCardClick(card)}
                   onStartRoundClick={onStartRound} />
 
@@ -60,12 +67,11 @@ function App() {
           return (
             <GameTable theme={game.deck.theme.table}>
               <SidePanel theme={game.deck.theme.panel}>
-                <CardHand cards={playerHand} theme={game.deck.theme.card} />
+                <CardHand hand={playerHand} theme={game.deck.theme.card} />
               </SidePanel>
-              {/* theme should not be part of deck... */}
               <Board board={board} cardTheme={game.deck.theme.card} />
               <SidePanel theme={game.deck.theme.panel}>
-                <CardHand cards={playerHand} theme={game.deck.theme.card} />
+                <CardHand hand={playerHand} theme={game.deck.theme.card} />
               </SidePanel>
             </GameTable>
           );
