@@ -4,14 +4,13 @@
     padding: 20px;
     margin: 2rem;
     border: 1px solid black;
+    overflow-y: hidden;
+    background-color: #eee;
 }
 
 .deck:hover {
     cursor: pointer;
     box-shadow: 5px 5px 15px -3px #1c07a1;
-    position: relative;
-    top: 3px;
-    right: 3px;
 }
 
 .description {
@@ -27,11 +26,27 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    /* justify-content: center; */
 }
 
 .ranks-description {
     flex: 2;
     display: flex;
     justify-content: center;
+}
+
+
+.deck:hover .card {
+    position: relative;
+    top: 100px;
+    left: 50px;
+    animation: card-zoom .8s forwards;
+}
+
+@keyframes card-zoom {
+    from {
+        transform: scale(1)
+    }
+    to {
+        transform: scale(2.2);
+    }
 }

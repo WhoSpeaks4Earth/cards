@@ -1,5 +1,5 @@
 import { ICardDeck } from "../models/ICardDeck";
-import { SpaceCatTheme, SpaceTableTheme, SpaceTheme, StocksTheme } from "./themes";
+import { BasketBallTheme, SpaceCatTheme, SpaceTableTheme, SpaceTheme, StocksTheme } from "./themes";
 
 export const cardDecks: ICardDeck[] = [
     {
@@ -160,6 +160,6 @@ export const cardDecks: ICardDeck[] = [
                 ranks: [10, 8, 8, 5]
             },
         ],
-        theme: {card: StocksTheme, table: SpaceTableTheme, panel: {bgColor: "rgba(0,0,0,0.5)"} }
+        theme: {card: BasketBallTheme, table: SpaceTableTheme, panel: {bgColor: "rgba(0,0,0,0.5)"} }
     }
 ]

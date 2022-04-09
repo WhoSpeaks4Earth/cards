@@ -59,6 +59,13 @@
 
 
 
+.card:hover {
+    animation: face-down 1s forwards;
+}
+.card:hover .front {
+    opacity: 0;
+    transition: opacity 1s;
+}
 
 /* ANIMATIONS */
 .face-up {

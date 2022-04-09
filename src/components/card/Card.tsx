@@ -6,8 +6,11 @@ import './card.css';
 
 export const Card = (props: {card: ICard, cssClass?: string, theme: ICardTheme}) => {
 
+    const hasFrontImg = props.theme.frontImg !== '';
+
     const getFrontStyle = () => ({
-        backgroundImage: props.theme.frontImg,
+        backgroundImage: hasFrontImg ? props.theme.frontImg : 'none',
+        backgroundColor: props.theme.bgColor,
         color: props.theme.fontColor
     });
     const getBackStyle = () => ({backgroundImage: props.theme.backImg});
