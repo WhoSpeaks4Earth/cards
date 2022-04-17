@@ -1,5 +1,14 @@
 
 
+.active  .card {
+    -webkit-box-shadow: 5px 5px 15px -3px #FFF; 
+    box-shadow: 5px 5px 15px -3px #FFF;
+}
+
+.selectable .card:hover {
+    cursor: pointer;
+}
+
 .card {
     border-radius: 12px;
     height: 200px;

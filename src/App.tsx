@@ -20,7 +20,7 @@ import { ICardHand } from './models/ICardHand';
 
 function App() {
   const [game, setGame] = useState<IGame>({deck: cardDecks[0], view: 'select-deck'});
-  const [playerHand, setPlayerHand] = useState<ICardHand>(() => ({cards: [], dealStyles: DealerService.getCardDealStyles()}));
+  const [playerHand, setPlayerHand] = useState<ICardHand>(() => ({cards: [], activeIndex: 0, dealStyles: DealerService.getCardDealStyles()}));
 
   const boardService = new BoardService();
   const board: IBoard = boardService.createBoard(3,3);
@@ -45,6 +45,10 @@ function App() {
   const onDeckSelected = (deck: ICardDeck) => setGame({deck, view: 'select-cards'});
 
   const renderView = (view: gameView): any => {
+  
+  const onPlayerCardSelected = (index: number) => {
+    setPlayerHand({...playerHand, activeIndex: index})
+  }
 
     switch(view) {
       case 'select-deck':
@@ -63,7 +67,13 @@ function App() {
               </SidePanel>
               <Board board={board} cardTheme={game.deck.theme.card} />
               <SidePanel theme={game.deck.theme.panel}>
-                <CardHand hand={playerHand} theme={game.deck.theme.card} />
+                <CardHand
+                  hand={playerHand}
+                  theme={game.deck.theme.card}
+                  selection={{
+                    activeIndex: playerHand.activeIndex,
+                    onSelect: (index: number) => onPlayerCardSelected(index)
+                  }} />
               </SidePanel>
             </GameTable>
           );
