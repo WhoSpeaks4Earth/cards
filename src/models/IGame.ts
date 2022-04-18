@@ -9,5 +9,6 @@ export interface IGame {
     deck: ICardDeck,
     view: gameView,
     playerHand: ICardHand,
+    opponentHand: ICardHand,
     board: IBoard
 }

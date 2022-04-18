@@ -11,24 +11,9 @@ import { Board } from './components/board/Board';
 import { GameTable } from './components/game-table/GameTable';
 import { DeckSelection } from './components/selection/deck-selection/DeckSelection';
 import { gameView } from './models/IGame';
-import { BoardService } from './services/board.service';
 import { GAME_SETTINGS } from './data/game-settings';
-import { DealerService } from './services/dealer.service';
 import { gameReducer } from './reducers/gameReducer';
-
-
-const boardService = new BoardService();
-
-const initialGameState = {
-  deck: cardDecks[0],
-  view: 'select-deck',
-  playerHand: {
-    cards: [],
-    activeIndex: 0,
-    dealStyles: DealerService.getCardDealStyles()
-  },
-  board: boardService.createBoard(3,3)
-}
+import { initialGameState } from './data/initial-game-state';
 
 
 function App() {
