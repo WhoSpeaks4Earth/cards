@@ -3,6 +3,7 @@ import { DealerService } from "../services/dealer.service";
 import { cardDecks } from "./card-decks";
 
 const boardService = new BoardService();
+const dealerService = new DealerService();
 
 export const initialGameState = {
     deck: cardDecks[0],
@@ -10,12 +11,12 @@ export const initialGameState = {
     playerHand: {
       cards: [],
       activeIndex: 0,
-      dealStyles: DealerService.getCardDealStyles()
+      dealStyles: dealerService.getCardDealStyles()
     },
     opponentHand: {
       cards: [],
       activeIndex: 0,
-      dealStyles: DealerService.getCardDealStyles()
+      dealStyles: dealerService.getCardDealStyles()
     },
     board: boardService.createBoard(3,3)
   }

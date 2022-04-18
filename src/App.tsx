@@ -51,7 +51,7 @@ function App() {
           return (
             <GameTable theme={state.deck.theme.table}>
               <SidePanel theme={state.deck.theme.panel}>
-                <CardHand hand={state.playerHand} theme={state.deck.theme.card} />
+                <CardHand hand={state.opponentHand} theme={state.deck.theme.card} />
               </SidePanel>
               <Board
                 board={state.board}
