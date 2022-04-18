@@ -1,7 +1,7 @@
 import { Layout } from './components/layout/Layout';
 import { MainContent } from './components/layout/MainContent';
 import { SidePanel } from './components/layout/SidePanel';
-import { useEffect, useState } from 'react';
+import { useReducer } from 'react';
 import { cardDecks } from './data/card-decks';
 import { ICardDeck } from './models/ICardDeck';
 import { CardSelection } from './components/selection/card-selection/CardSelection';
@@ -10,70 +10,78 @@ import { ICard } from './models/ICard';
 import { Board } from './components/board/Board';
 import { GameTable } from './components/game-table/GameTable';
 import { DeckSelection } from './components/selection/deck-selection/DeckSelection';
-import { gameView, IGame } from './models/IGame';
+import { gameView } from './models/IGame';
 import { BoardService } from './services/board.service';
-import { IBoard } from './models/IBoard';
-import { DealerService } from './services/dealer.service';
 import { GAME_SETTINGS } from './data/game-settings';
-import { ICardHand } from './models/ICardHand';
+import { DealerService } from './services/dealer.service';
+import { gameReducer } from './reducers/gameReducer';
+
+
+const boardService = new BoardService();
+
+const initialGameState = {
+  deck: cardDecks[0],
+  view: 'select-deck',
+  playerHand: {
+    cards: [],
+    activeIndex: 0,
+    dealStyles: DealerService.getCardDealStyles()
+  },
+  board: boardService.createBoard(3,3)
+}
 
 
 function App() {
-  const [game, setGame] = useState<IGame>({deck: cardDecks[0], view: 'select-deck'});
-  const [playerHand, setPlayerHand] = useState<ICardHand>(() => ({cards: [], activeIndex: 0, dealStyles: DealerService.getCardDealStyles()}));
+  const [state, dispatch] = useReducer(gameReducer, initialGameState);
 
-  const boardService = new BoardService();
-  const board: IBoard = boardService.createBoard(3,3);
-  board.cells[0][0] = {card: {title: "test", ranks: [1,1,1,1]}};
+  const onDeckSelected = (deck: ICardDeck) => dispatch({type: 'setDeck', payload: {deck, view: 'select-cards'}});
+  const onStartRound = () => dispatch({type: 'setView', payload: {view: 'active-game'}});
+  const onPlayerCardClick = (index: number) => dispatch({type: 'setActiveCardInHand', payload: {handType: 'playerHand', index}});
+  const onBoardCellClick = (position: [number, number]) => dispatch({type: 'placeCardOnBoard', payload: {position}});
 
-
-  useEffect(() => {
-    const decks = cardDecks;
-    setGame({...game, deck: decks[0]})
-  }, []);
-
-  const onCardClick = (card: ICard) => {
-    const existingCardIndex = playerHand.cards.findIndex(c => c.title === card.title);
-    const doesExistInHand = existingCardIndex >= 0;
-    if (doesExistInHand)
-      setPlayerHand({...playerHand, cards: playerHand.cards.filter(c => c.title !== card.title)});
-    else if (playerHand.cards.length < GAME_SETTINGS.MAX_CARDS_PER_HAND && !doesExistInHand)
-      setPlayerHand({...playerHand, cards: [...playerHand.cards, card]});
+  const onCardSelectionClick = (card: ICard) => {
+    if (shouldRemoveCardFromHand(card))
+      dispatch({type: 'removeCardFromHand', payload: {card, handType: 'playerHand'}});
+    else if (shouldAddCardToHand(card))
+      dispatch({type: 'addCardToHand', payload: {card, handType: 'playerHand'}});
   }
 
-  const onStartRound = () => setGame({...game, view: 'active-game'});
-  const onDeckSelected = (deck: ICardDeck) => setGame({deck, view: 'select-cards'});
+  const shouldRemoveCardFromHand = (card: ICard) => cardExistsInHand(card);
+  const shouldAddCardToHand = (card: ICard) => !cardExistsInHand(card) && state.playerHand.cards.length < GAME_SETTINGS.MAX_CARDS_PER_HAND;
+  const cardExistsInHand = (card: ICard): boolean => state.playerHand.cards.findIndex((c: ICard) => c.title === card.title) >= 0;
+
 
   const renderView = (view: gameView): any => {
-  
-  const onPlayerCardSelected = (index: number) => {
-    setPlayerHand({...playerHand, activeIndex: index})
-  }
 
     switch(view) {
       case 'select-deck':
         return <DeckSelection decks={cardDecks} onDeckSelected={(deck: ICardDeck) => onDeckSelected(deck)} />
       case 'select-cards':
         return <CardSelection
-                  deck={game.deck}
-                  playerHand={playerHand}
-                  onCardClick={(card: ICard) => onCardClick(card)}
+                  deck={state.deck}
+                  playerHand={state.playerHand}
+                  onCardClick={(card: ICard) => onCardSelectionClick(card)}
                   onStartRoundClick={onStartRound} />
         case 'active-game':
           return (
-            <GameTable theme={game.deck.theme.table}>
-              <SidePanel theme={game.deck.theme.panel}>
-                <CardHand hand={playerHand} theme={game.deck.theme.card} />
+            <GameTable theme={state.deck.theme.table}>
+              <SidePanel theme={state.deck.theme.panel}>
+                <CardHand hand={state.playerHand} theme={state.deck.theme.card} />
               </SidePanel>
-              <Board board={board} cardTheme={game.deck.theme.card} />
-              <SidePanel theme={game.deck.theme.panel}>
+              <Board
+                board={state.board}
+                cardTheme={state.deck.theme.card}
+                onCellClick={(position: [number, number]) => onBoardCellClick(position)}
+              />
+              <SidePanel theme={state.deck.theme.panel}>
                 <CardHand
-                  hand={playerHand}
-                  theme={game.deck.theme.card}
+                  hand={state.playerHand}
+                  theme={state.deck.theme.card}
                   selection={{
-                    activeIndex: playerHand.activeIndex,
-                    onSelect: (index: number) => onPlayerCardSelected(index)
-                  }} />
+                    activeIndex: state.playerHand.activeIndex,
+                    onClick: (index: number) => onPlayerCardClick(index)
+                  }}
+                />
               </SidePanel>
             </GameTable>
           );
@@ -83,7 +91,7 @@ function App() {
   return (
       <Layout>
         <MainContent>
-          {renderView(game.view)}
+          {renderView(state.view)}
         </MainContent>
       </Layout>
   );

@@ -11,5 +11,5 @@ export interface ICardHand {
 export interface ICardHandProps {
     hand: ICardHand,
     theme: ICardTheme,
-    selection?: {activeIndex: number, onSelect: (index: number) => void}
+    selection?: {activeIndex: number, onClick: (index: number) => void}
 }

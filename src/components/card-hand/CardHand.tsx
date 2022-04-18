@@ -16,7 +16,7 @@ export const CardHand = (props: ICardHandProps) => {
                 css += 'active ';
             }
         }
-        
+
         return css;
     }
 
@@ -28,7 +28,8 @@ export const CardHand = (props: ICardHandProps) => {
                         key={card.title + i} 
                         style={props.hand.dealStyles[i]} 
                         className={getCssClasses(i)}
-                        onClick={() => props.selection?.onSelect(i)}>
+                        onClick={() => props.selection?.onClick(i)}
+                    >
                         <Card card={card} theme={props.theme}/>
                     </div>
                 ))
