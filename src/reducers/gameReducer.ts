@@ -30,7 +30,11 @@ export const gameReducer = (state: IGame, action: {type: string, payload: any}) 
         const cardToPlace: ICard = state.playerHand.cards[state.playerHand.activeIndex];
         const newBoard = Object.assign({}, state.board);
         newBoard.cells[y][x] = {card: cardToPlace};
-        const newPlayerHand = {...state.playerHand, cards: dealerService.removeCardFromSet(cardToPlace, state.playerHand.cards)}
+        const newPlayerHand = {
+          ...state.playerHand,
+          cards: dealerService.removeCardFromSet(cardToPlace, state.playerHand.cards),
+          activeIndex: 0
+        }
         return {...state, playerHand: newPlayerHand, board: newBoard};
   
       default:

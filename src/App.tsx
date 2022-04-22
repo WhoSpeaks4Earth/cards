@@ -77,8 +77,8 @@ function App() {
   return (
       <Layout>
         <MainContent>
-          {/* {renderView(state.view)} */}
-          <CardDetails card={cardDecks[0].cards[0]} theme={cardDecks[0].theme.card} />
+          {renderView(state.view)}
+          {/* <CardDetails card={cardDecks[0].cards[0]} theme={cardDecks[0].theme.card} /> */}
         </MainContent>
       </Layout>
   );
