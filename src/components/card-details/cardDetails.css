@@ -1,0 +1,21 @@
+
+
+.card-details {
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+    overflow-y: hidden;
+}
+
+.title-description {
+    flex: 1;
+    text-align: center;
+    width: 100%;
+}
+
+.title-description > p {
+    font-size: .9rem;
+}

@@ -9,7 +9,7 @@ export const cardDecks: ICardDeck[] = [
         cards: [
             {
                 title: "Jupiter",
-                ranks: [5, 7, 3, 9]
+                ranks: [2, 9, 7, 9]
             },
             {
                 title: "Mars",

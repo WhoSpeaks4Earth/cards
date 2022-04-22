@@ -14,6 +14,7 @@ import { gameView } from './models/IGame';
 import { GAME_SETTINGS } from './data/game-settings';
 import { gameReducer } from './reducers/gameReducer';
 import { initialGameState } from './data/initial-game-state';
+import { CardDetails } from './components/card-details/CardDetails';
 
 
 function App() {
@@ -76,7 +77,8 @@ function App() {
   return (
       <Layout>
         <MainContent>
-          {renderView(state.view)}
+          {/* {renderView(state.view)} */}
+          <CardDetails card={cardDecks[0].cards[0]} theme={cardDecks[0].theme.card} />
         </MainContent>
       </Layout>
   );

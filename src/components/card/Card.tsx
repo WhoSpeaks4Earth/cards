@@ -1,10 +1,9 @@
 import { CardRanks } from './CardRanks';
-import { ICard } from '../../models/ICard';
-import { ICardTheme } from '../../models/ICardTheme';
+import { ICardProps } from '../../models/ICard';
 import './card.css';
 
 
-export const Card = (props: {card: ICard, cssClass?: string, theme: ICardTheme}) => {
+export const Card = (props: ICardProps) => {
 
     const hasFrontImg = props.theme.frontImg !== '';
 
@@ -16,7 +15,7 @@ export const Card = (props: {card: ICard, cssClass?: string, theme: ICardTheme})
     const getBackStyle = () => ({backgroundImage: props.theme.backImg});
 
     return (
-        <div className={'card ' + (props.cssClass ? props.cssClass : '')}>
+        <div className={'card ' + (props.cssClasses ? props.cssClasses : '')}>
             <div className='back'
                 style={getBackStyle()}>
                 <div className='front'

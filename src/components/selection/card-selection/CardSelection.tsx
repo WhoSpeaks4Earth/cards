@@ -32,7 +32,7 @@ export const CardSelection = (props: {
                 <div className="cards-list">
                     {props.deck.cards.map(card => (
                         <div key={card.title} onClick={() => props.onCardClick(card)}>
-                            <Card card={card} cssClass={getClickableSelectableCss(card)} theme={props.deck.theme.card} />
+                            <Card card={card} cssClasses={getClickableSelectableCss(card)} theme={props.deck.theme.card} />
                         </div>
                     ))}
                 </div>
