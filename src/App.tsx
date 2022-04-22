@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     const isBoardFull = boardService.isBoardFull(state.board);
-    console.log(isBoardFull)
+    // console.log(isBoardFull)
     if (!state.isPlayerTurn && !isBoardFull)
       dispatch({type: 'doOpponentMove'})
       
