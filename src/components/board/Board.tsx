@@ -25,10 +25,6 @@ export const Board = (props: IBoardProps) => {
                     ))
                 }
             </div>
-
-            <div className="status-panel">
-                {/* status panel */}
-            </div>
         </div>
     )
 }

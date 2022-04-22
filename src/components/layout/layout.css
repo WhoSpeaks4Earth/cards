@@ -11,6 +11,13 @@
     flex: 4;
 }
 
+.center-piece {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .side-panel {
     flex: 1;
     display: flex;

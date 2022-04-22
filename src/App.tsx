@@ -15,6 +15,8 @@ import { GAME_SETTINGS } from './data/game-settings';
 import { gameReducer } from './reducers/gameReducer';
 import { initialGameState } from './data/initial-game-state';
 import { CardDetails } from './components/card-details/CardDetails';
+import { StatusPanel } from './components/status-panel/StatusPanel';
+import { CenterPiece } from './components/layout/CenterPiece';
 
 
 function App() {
@@ -54,11 +56,14 @@ function App() {
               <SidePanel theme={state.deck.theme.panel}>
                 <CardHand hand={state.opponentHand} theme={state.deck.theme.card} />
               </SidePanel>
-              <Board
-                board={state.board}
-                cardTheme={state.deck.theme.card}
-                onCellClick={(position: [number, number]) => onBoardCellClick(position)}
-              />
+              <CenterPiece>
+                <Board
+                  board={state.board}
+                  cardTheme={state.deck.theme.card}
+                  onCellClick={(position: [number, number]) => onBoardCellClick(position)}
+                />
+                <StatusPanel isPlayerTurn={state.isPlayerTurn} />
+              </CenterPiece>
               <SidePanel theme={state.deck.theme.panel}>
                 <CardHand
                   hand={state.playerHand}

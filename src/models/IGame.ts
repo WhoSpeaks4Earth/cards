@@ -10,5 +10,6 @@ export interface IGame {
     view: gameView,
     playerHand: ICardHand,
     opponentHand: ICardHand,
-    board: IBoard
+    board: IBoard,
+    isPlayerTurn: boolean
 }

@@ -18,5 +18,6 @@ export const initialGameState = {
       activeIndex: 0,
       dealStyles: dealerService.getCardDealStyles()
     },
-    board: boardService.createBoard(3,3)
+    board: boardService.createBoard(3,3),
+    isPlayerTurn: true
   }

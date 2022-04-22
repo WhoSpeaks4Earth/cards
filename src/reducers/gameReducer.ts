@@ -35,7 +35,7 @@ export const gameReducer = (state: IGame, action: {type: string, payload: any}) 
           cards: dealerService.removeCardFromSet(cardToPlace, state.playerHand.cards),
           activeIndex: 0
         }
-        return {...state, playerHand: newPlayerHand, board: newBoard};
+        return {...state, playerHand: newPlayerHand, board: newBoard, isPlayerTurn: false};
   
       default:
         throw new Error();
