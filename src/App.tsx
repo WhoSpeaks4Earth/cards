@@ -1,7 +1,7 @@
 import { Layout } from './components/layout/Layout';
 import { MainContent } from './components/layout/MainContent';
 import { SidePanel } from './components/layout/SidePanel';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { cardDecks } from './data/card-decks';
 import { ICardDeck } from './models/ICardDeck';
 import { CardSelection } from './components/selection/card-selection/CardSelection';
@@ -17,27 +17,40 @@ import { initialGameState } from './data/initial-game-state';
 import { CardDetails } from './components/card-details/CardDetails';
 import { StatusPanel } from './components/status-panel/StatusPanel';
 import { CenterPiece } from './components/layout/CenterPiece';
+import { BoardService } from './services/board.service';
 
+const boardService = new BoardService();
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
 
+
+  useEffect(() => {
+    const isBoardFull = boardService.isBoardFull(state.board);
+    console.log(isBoardFull)
+    if (!state.isPlayerTurn && !isBoardFull)
+      dispatch({type: 'doOpponentMove'})
+      
+  }, [state.isPlayerTurn]);
+
   const onDeckSelected = (deck: ICardDeck) => dispatch({type: 'setDeck', payload: {deck, view: 'select-cards'}});
-  const onStartRound = () => dispatch({type: 'setView', payload: {view: 'active-game'}});
+  const onStartGame = () => dispatch({type: 'startGame'});
   const onPlayerCardClick = (index: number) => dispatch({type: 'setActiveCardInHand', payload: {handType: 'playerHand', index}});
-  const onBoardCellClick = (position: [number, number]) => dispatch({type: 'placeCardOnBoard', payload: {position}});
+  const onBoardCellClick = (position: [number, number]) => {
+    if (state.playerHand.cards.length > 0) {
+      dispatch({type: 'doPlayerMove', payload: {position}});
+    }
+  }
 
   const onCardSelectionClick = (card: ICard) => {
-    if (shouldRemoveCardFromHand(card))
+    if (cardExistsInHand(card))
       dispatch({type: 'removeCardFromHand', payload: {card, handType: 'playerHand'}});
     else if (shouldAddCardToHand(card))
       dispatch({type: 'addCardToHand', payload: {card, handType: 'playerHand'}});
   }
 
-  const shouldRemoveCardFromHand = (card: ICard) => cardExistsInHand(card);
   const shouldAddCardToHand = (card: ICard) => !cardExistsInHand(card) && state.playerHand.cards.length < GAME_SETTINGS.MAX_CARDS_PER_HAND;
   const cardExistsInHand = (card: ICard): boolean => state.playerHand.cards.findIndex((c: ICard) => c.title === card.title) >= 0;
-
 
   const renderView = (view: gameView): any => {
 
@@ -49,7 +62,7 @@ function App() {
                   deck={state.deck}
                   playerHand={state.playerHand}
                   onCardClick={(card: ICard) => onCardSelectionClick(card)}
-                  onStartRoundClick={onStartRound} />
+                  onStartGameClick={onStartGame} />
         case 'active-game':
           return (
             <GameTable theme={state.deck.theme.table}>

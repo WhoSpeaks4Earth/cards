@@ -4,13 +4,25 @@ import { DealerService } from "../services/dealer.service";
 
 const dealerService = new DealerService();
 
-export const gameReducer = (state: IGame, action: {type: string, payload: any}) => {
+export const gameReducer = (state: IGame, action: {type: string, payload?: any}) => {
     switch (action.type) {
-      case 'setView':
-        return {...state, ...action.payload, opponentHand: {...state.opponentHand, cards: dealerService.getHand(state.deck.cards)}}
+      case 'startGame':
+        return {
+          ...state, 
+          view: 'active-game',
+          opponentHand: {
+            ...state.opponentHand, 
+            cards: dealerService.getHand(state.deck.cards)
+          }
+        }
 
       case 'setDeck':
         return {...state, ...action.payload};
+
+      case 'setOpponentHand':
+        const opponentHand = dealerService.getHand(state.deck.cards);
+        console.log(opponentHand)
+        return {...state, opponentHand}
   
       case 'addCardToHand':
         const addCardHandType = action.payload.handType as keyof Object;
@@ -25,17 +37,29 @@ export const gameReducer = (state: IGame, action: {type: string, payload: any}) 
         const activeCardHandType = action.payload.handType as keyof Object;
         return {...state, [activeCardHandType]: {...state[activeCardHandType], activeIndex: action.payload.index}};
   
-      case 'placeCardOnBoard':
+      case 'doPlayerMove':
         const [x, y] = action.payload.position;
         const cardToPlace: ICard = state.playerHand.cards[state.playerHand.activeIndex];
         const newBoard = Object.assign({}, state.board);
         newBoard.cells[y][x] = {card: cardToPlace};
+        const newPlayerCards = dealerService.removeCardFromSet(cardToPlace, state.playerHand.cards);
         const newPlayerHand = {
           ...state.playerHand,
-          cards: dealerService.removeCardFromSet(cardToPlace, state.playerHand.cards),
-          activeIndex: 0
+          cards: newPlayerCards,
+          activeIndex: newPlayerCards.length > 0 ? 0 : -1
         }
-        return {...state, playerHand: newPlayerHand, board: newBoard, isPlayerTurn: false};
+        return {...state, playerHand: newPlayerHand, board: newBoard, isPlayerTurn: !state.isPlayerTurn};
+
+        case 'doOpponentMove':
+          const bestCard: ICard = state.opponentHand.cards[0];
+          const newBoardFromOpponentMove = Object.assign({}, state.board);
+          newBoardFromOpponentMove.cells[0][0] = {card: bestCard};
+          const newOpponentHand = {
+            ...state.opponentHand,
+            cards: dealerService.removeCardFromSet(bestCard, state.opponentHand.cards),
+            activeIndex: 0
+          }
+          return {...state, opponentHand: newOpponentHand, board: newBoardFromOpponentMove, isPlayerTurn: !state.isPlayerTurn};
   
       default:
         throw new Error();

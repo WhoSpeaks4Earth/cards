@@ -5,7 +5,8 @@ import { ICard } from "../models/ICard";
 export class DealerService {
 
   removeCardFromSet(cardToRemove: ICard, cardSet: ICard[]) {
-    return cardSet.filter((c: ICard) => c.title !== cardToRemove.title);
+    const newCardSet = cardSet.filter((c: ICard) => c.title !== cardToRemove.title);
+    return newCardSet;
   }
 
   // TODO: ensure cards are unique, or start using ids to filter/match

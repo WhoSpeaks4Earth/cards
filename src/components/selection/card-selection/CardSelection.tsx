@@ -12,7 +12,7 @@ export const CardSelection = (props: {
     deck: ICardDeck,
     playerHand: ICardHand,
     onCardClick: any,
-    onStartRoundClick: any
+    onStartGameClick: any
 }) => {
 
     const getClickableSelectableCss = (card: ICard): string => {
@@ -38,9 +38,9 @@ export const CardSelection = (props: {
                 </div>
                 <button
                     disabled={props.playerHand.cards.length < GAME_SETTINGS.MAX_CARDS_PER_HAND}
-                    onClick={props.onStartRoundClick}
+                    onClick={props.onStartGameClick}
                     className='primary-btn'>
-                    Start Round
+                    Start
                 </button>
             </div>
 

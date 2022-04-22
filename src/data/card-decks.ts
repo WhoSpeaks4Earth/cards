@@ -17,15 +17,15 @@ export const cardDecks: ICardDeck[] = [
             },
             {
                 title: "Earth",
-                ranks: [5, 7, 3, 9]
+                ranks: [4, 6, 8, 4]
             },
             {
                 title: "Sun",
-                ranks: [5, 7, 3, 10]
+                ranks: [10, 7, 3, 10]
             },
             {
                 title: "Saturn",
-                ranks: [5, 7, 3, 9]
+                ranks: [6, 3, 1, 8]
             },
             {
                 title: "Neptune",
@@ -43,7 +43,7 @@ export const cardDecks: ICardDeck[] = [
         theme: {card: SpaceTheme, table: SpaceTableTheme, panel: {bgColor: "rgba(0,0,0,0.5)"} }
     },
     {
-        name: "Space Cat",
+        name: "Space Cats",
         categories: ["silly"],
         description: "Cats in space. These cat-dets are ranked in categories of fiestiness, cuddliness, purr, and fur.",
         cards: [

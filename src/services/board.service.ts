@@ -1,4 +1,4 @@
-import { IBoard } from "../models/IBoard";
+import { IBoard, IBoardCell } from "../models/IBoard";
 
 
 export class BoardService {
@@ -16,5 +16,22 @@ export class BoardService {
         }
 
         return {cells: cells}
+    }
+
+    public isBoardFull = (board: IBoard): boolean => {
+        let hasEmptyCell = false;
+
+        rows:
+        for (let y = 0; y < board.cells.length; y++) {
+            cells:
+            for (let x = 0; x < board.cells[y].length; x++) {
+                if (!board.cells[x][y].card) {
+                    hasEmptyCell = true;
+                    break rows;
+                }
+            }
+        }
+
+        return !hasEmptyCell;
     }
 }
