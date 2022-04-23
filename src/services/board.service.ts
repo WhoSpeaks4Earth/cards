@@ -19,19 +19,24 @@ export class BoardService {
     }
 
     public isBoardFull = (board: IBoard): boolean => {
-        let hasEmptyCell = false;
+        const emptyCell = this.getEmptyCell(board.cells);
+        if (emptyCell)
+            return false;
+        return true; 
+    }
 
+    public getEmptyCell = (cells: IBoardCell[][]): [number, number] | null => {
+        let emptyCell: [number, number] | null = null;
         rows:
-        for (let y = 0; y < board.cells.length; y++) {
-            cells:
-            for (let x = 0; x < board.cells[y].length; x++) {
-                if (!board.cells[x][y].card) {
-                    hasEmptyCell = true;
+        for (let y = 0; y < cells.length; y++) {
+            for (let x = 0; x < cells[y].length; x++) {
+                if (!cells[x][y].card) {
+                    emptyCell = [x, y];
                     break rows;
                 }
             }
         }
 
-        return !hasEmptyCell;
+        return emptyCell;
     }
 }

@@ -12,5 +12,6 @@ export interface IBoard {
 export interface IBoardProps {
     board: IBoard,
     cardTheme: ICardTheme,
+    isClickable: boolean,
     onCellClick: (position: [number, number]) => void
 }

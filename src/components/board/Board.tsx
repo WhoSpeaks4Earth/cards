@@ -4,6 +4,10 @@ import './board.css';
 
 export const Board = (props: IBoardProps) => {
 
+    const getCss = () => {
+        return props.isClickable ? 'clickable' : '';
+    }
+
     return (
         <div className="board">
             <div className="cells">
@@ -13,12 +17,13 @@ export const Board = (props: IBoardProps) => {
                             {
                                 row.map((cell, xIndex) => {
                                     const card = props.board.cells[yIndex][xIndex].card;
-                                    return card ? <Card key={`${xIndex}${yIndex}`} card={card} theme={props.cardTheme} /> :
-                                    (
-                                        <div key={`${xIndex}${yIndex}`} className="cell" onClick={() => props.onCellClick([xIndex, yIndex])}>
-                                            {/* {xIndex}, {yIndex} */}
-                                        </div>
-                                    )                                    
+                                    return card
+                                        ? <Card key={`${xIndex}${yIndex}`} card={card} theme={props.cardTheme} />
+                                        : (
+                                            <div key={`${xIndex}${yIndex}`} className={`cell ${getCss()}`} onClick={() => props.onCellClick([xIndex, yIndex])}>
+                                                {/* {xIndex}, {yIndex} */}
+                                            </div>
+                                        )                                    
                                 })
                             }
                         </div>

@@ -18,27 +18,33 @@ import { CardDetails } from './components/card-details/CardDetails';
 import { StatusPanel } from './components/status-panel/StatusPanel';
 import { CenterPiece } from './components/layout/CenterPiece';
 import { BoardService } from './services/board.service';
+import { ICardHand } from './models/ICardHand';
+import { CardService } from './services/card.service';
 
 const boardService = new BoardService();
+const cardService = new CardService();
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
 
 
-  useEffect(() => {
-    const isBoardFull = boardService.isBoardFull(state.board);
-    // console.log(isBoardFull)
-    if (!state.isPlayerTurn && !isBoardFull)
-      dispatch({type: 'doOpponentMove'})
-      
-  }, [state.isPlayerTurn]);
+  // useEffect(() => {
+  //   // if (opponentCanPlay()) {
+  //   //   const timer = setTimeout(() => dispatch({type: 'doOpponentMove'}), 2000);
+  //   //   return () => clearTimeout(timer);
+  //   // }
+  // });
 
+  const opponentCanPlay = (): boolean => {
+    const isBoardFull = boardService.isBoardFull(state.board);
+    return !state.isPlayerTurn && !isBoardFull && cardService.handHasCards(state.opponentHand);
+  }
   const onDeckSelected = (deck: ICardDeck) => dispatch({type: 'setDeck', payload: {deck, view: 'select-cards'}});
   const onStartGame = () => dispatch({type: 'startGame'});
   const onPlayerCardClick = (index: number) => dispatch({type: 'setActiveCardInHand', payload: {handType: 'playerHand', index}});
   const onBoardCellClick = (position: [number, number]) => {
-    if (state.playerHand.cards.length > 0) {
-      dispatch({type: 'doPlayerMove', payload: {position}});
+    if (state.isPlayerTurn && cardService.handHasCards(state.playerHand)) {
+      dispatch({type: 'doPlayerMove', payload: {position, cardToPlay: state.playerHand.cards[state.playerHand.activeIndex]}});
     }
   }
 
@@ -51,6 +57,7 @@ function App() {
 
   const shouldAddCardToHand = (card: ICard) => !cardExistsInHand(card) && state.playerHand.cards.length < GAME_SETTINGS.MAX_CARDS_PER_HAND;
   const cardExistsInHand = (card: ICard): boolean => state.playerHand.cards.findIndex((c: ICard) => c.title === card.title) >= 0;
+  
 
   const renderView = (view: gameView): any => {
 
@@ -74,7 +81,14 @@ function App() {
                   board={state.board}
                   cardTheme={state.deck.theme.card}
                   onCellClick={(position: [number, number]) => onBoardCellClick(position)}
+                  isClickable={state.isPlayerTurn && cardService.handHasCards(state.playerHand)}
                 />
+                <button onClick={() => dispatch({
+                  type: 'doOpponentMove', 
+                  payload: {
+                    cardToPlay: state.opponentHand.cards[0], 
+                    boardCellPosition: [0, 0]
+                    }})}>Opponent Move</button>
                 <StatusPanel isPlayerTurn={state.isPlayerTurn} />
               </CenterPiece>
               <SidePanel theme={state.deck.theme.panel}>

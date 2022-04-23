@@ -4,19 +4,15 @@ import { ICard } from "../models/ICard";
 
 export class DealerService {
 
-  removeCardFromSet(cardToRemove: ICard, cardSet: ICard[]) {
-    const newCardSet = cardSet.filter((c: ICard) => c.title !== cardToRemove.title);
-    return newCardSet;
-  }
-
-  // TODO: ensure cards are unique, or start using ids to filter/match
   getHand(cardSetToChooseFrom: ICard[]): ICard[] {
-    const hand: ICard[] = [];
-
-    for (let i = 0; i < GAME_SETTINGS.MAX_CARDS_PER_HAND; i++) 
-      hand.push(this.getRandomCardFromSet(cardSetToChooseFrom))
-
-    return hand;
+    const cards: ICard[] = [];
+    while (cards.length < GAME_SETTINGS.MAX_CARDS_PER_HAND) {
+      const randomCard = this.getRandomCardFromSet(cardSetToChooseFrom);
+      const alreadyChosen = cards.findIndex(card => card.title === randomCard.title) > -1;
+      if (!alreadyChosen)
+        cards.push(randomCard);
+    }
+    return cards;
   }
 
   getRandomCardFromSet(cardSet: ICard[]) {

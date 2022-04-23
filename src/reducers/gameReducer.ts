@@ -1,8 +1,12 @@
 import { ICard } from "../models/ICard";
 import { IGame } from "../models/IGame";
+import { BoardService } from "../services/board.service";
+import { CardService } from "../services/card.service";
 import { DealerService } from "../services/dealer.service";
 
 const dealerService = new DealerService();
+const boardService = new BoardService();
+const cardService = new CardService();
 
 export const gameReducer = (state: IGame, action: {type: string, payload?: any}) => {
     switch (action.type) {
@@ -28,7 +32,7 @@ export const gameReducer = (state: IGame, action: {type: string, payload?: any})
         return getPlayerMoveNewState(state, action.payload);
 
       case 'doOpponentMove':
-        return getOpponentMoveNewState(state);
+        return getOpponentMoveNewState(state, action.payload);
   
       default:
         throw new Error();
@@ -42,7 +46,7 @@ export const gameReducer = (state: IGame, action: {type: string, payload?: any})
 
   const getRemoveCardFromHandNewState = (state: IGame, payload: any): IGame => {
     const card = payload.card;
-    const newCards = dealerService.removeCardFromSet(card, state.playerHand.cards);
+    const newCards = cardService.removeCardFromSet(card, state.playerHand.cards);
     return {...state, playerHand: {...state.playerHand, cards: newCards}};
   }
 
@@ -52,29 +56,26 @@ export const gameReducer = (state: IGame, action: {type: string, payload?: any})
   }
 
   const getPlayerMoveNewState = (state: IGame, payload: any): IGame => {
-    const [x, y] = payload.position;
-    const cardToPlay: ICard = state.playerHand.cards[state.playerHand.activeIndex];
-    const newBoard = Object.assign({}, state.board);
-    newBoard.cells[y][x] = {card: cardToPlay};
-    const newPlayerCards = dealerService.removeCardFromSet(cardToPlay, state.playerHand.cards);
+    const cardToPlay: ICard = payload.cardToPlay;
+    const newBoard = {...state.board};
+    const newPlayerCards = cardService.removeCardFromSet(cardToPlay, state.playerHand.cards);
     const newPlayerHand = {
       ...state.playerHand,
       cards: newPlayerCards,
       activeIndex: newPlayerCards.length > 0 ? 0 : -1
     }
-    return {...state, playerHand: newPlayerHand, board: newBoard, isPlayerTurn: !state.isPlayerTurn};
+    return {...state, playerHand: newPlayerHand, board: newBoard, isPlayerTurn: false};
   }
 
-  const getOpponentMoveNewState = (state: IGame): IGame => {
-    const cardToPlay: ICard = state.opponentHand.cards[0];
-    const newBoard = Object.assign({}, state.board);
-    newBoard.cells[0][0] = {card: cardToPlay};
+  const getOpponentMoveNewState = (state: IGame, payload: any): IGame => {
+    const cardToPlay: ICard = payload.cardToPlay;
+    const newBoard = {...state.board};
     const newOpponentHand = {
       ...state.opponentHand,
-      cards: dealerService.removeCardFromSet(cardToPlay, state.opponentHand.cards),
+      cards: cardService.removeCardFromSet(cardToPlay, state.opponentHand.cards),
       activeIndex: 0
     }
-    return {...state, opponentHand: newOpponentHand, board: newBoard, isPlayerTurn: !state.isPlayerTurn};
+    return {...state, opponentHand: newOpponentHand, board: newBoard, isPlayerTurn: true};
   }
 
   
