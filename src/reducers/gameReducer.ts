@@ -32,7 +32,7 @@ export const gameReducer = (state: IGame, action: {type: string, payload?: any})
         return getPlayerMoveNewState(state, action.payload);
 
       case 'doOpponentMove':
-        return getOpponentMoveNewState(state, action.payload);
+        return getOpponentMoveNewState(state);
   
       default:
         throw new Error();
@@ -67,9 +67,9 @@ export const gameReducer = (state: IGame, action: {type: string, payload?: any})
     return {...state, playerHand: newPlayerHand, board: newBoard, isPlayerTurn: false};
   }
 
-  const getOpponentMoveNewState = (state: IGame, payload: any): IGame => {
-    const cardToPlay: ICard = payload.cardToPlay;
-    const newBoard = {...state.board};
+  const getOpponentMoveNewState = (state: IGame): IGame => {
+    const [cell, cardToPlay] = boardService.getBestMove(state.board, state.opponentHand.cards);
+    const newBoard = boardService.getNewBoardFromMove(state.board, cell, cardToPlay);
     const newOpponentHand = {
       ...state.opponentHand,
       cards: cardService.removeCardFromSet(cardToPlay, state.opponentHand.cards),

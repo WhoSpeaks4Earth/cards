@@ -1,7 +1,7 @@
 import { Layout } from './components/layout/Layout';
 import { MainContent } from './components/layout/MainContent';
 import { SidePanel } from './components/layout/SidePanel';
-import { useEffect, useReducer } from 'react';
+import { useReducer } from 'react';
 import { cardDecks } from './data/card-decks';
 import { ICardDeck } from './models/ICardDeck';
 import { CardSelection } from './components/selection/card-selection/CardSelection';
@@ -14,11 +14,11 @@ import { gameView } from './models/IGame';
 import { GAME_SETTINGS } from './data/game-settings';
 import { gameReducer } from './reducers/gameReducer';
 import { initialGameState } from './data/initial-game-state';
-import { CardDetails } from './components/card-details/CardDetails';
+// import { CardDetails } from './components/card-details/CardDetails';
 import { StatusPanel } from './components/status-panel/StatusPanel';
 import { CenterPiece } from './components/layout/CenterPiece';
 import { BoardService } from './services/board.service';
-import { ICardHand } from './models/ICardHand';
+// import { ICardHand } from './models/ICardHand';
 import { CardService } from './services/card.service';
 
 const boardService = new BoardService();
@@ -83,12 +83,7 @@ function App() {
                   onCellClick={(position: [number, number]) => onBoardCellClick(position)}
                   isClickable={state.isPlayerTurn && cardService.handHasCards(state.playerHand)}
                 />
-                <button onClick={() => dispatch({
-                  type: 'doOpponentMove', 
-                  payload: {
-                    cardToPlay: state.opponentHand.cards[0], 
-                    boardCellPosition: [0, 0]
-                    }})}>Opponent Move</button>
+                <button onClick={() => dispatch({type: 'doOpponentMove'})}>Opponent Move</button>
                 <StatusPanel isPlayerTurn={state.isPlayerTurn} />
               </CenterPiece>
               <SidePanel theme={state.deck.theme.panel}>

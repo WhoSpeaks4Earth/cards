@@ -1,4 +1,5 @@
 import { IBoard, IBoardCell } from "../models/IBoard";
+import { ICard } from "../models/ICard";
 
 
 export class BoardService {
@@ -38,5 +39,16 @@ export class BoardService {
         }
 
         return emptyCell;
+    }
+
+    public getBestMove(board: IBoard, cards: ICard[]): [[number, number], ICard] {
+        const [cell, cardToPlay] = [[0,0] as [number, number], cards[0]];
+
+        return [cell, cardToPlay];
+    }
+
+    public getNewBoardFromMove = (board: IBoard, cell: [number, number], cardToPlay: ICard): IBoard => {
+        const newBoard = {...board};
+        return newBoard;
     }
 }
