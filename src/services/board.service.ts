@@ -42,7 +42,8 @@ export class BoardService {
     }
 
     public getBestMove(board: IBoard, cards: ICard[]): [[number, number], ICard] {
-        const [cell, cardToPlay] = [[0,0] as [number, number], cards[0]];
+        const cell = this.getEmptyCell(board.cells) as [number, number]; //[0, 0] as [number, number];
+        const cardToPlay = cards[0];
 
         return [cell, cardToPlay];
     }

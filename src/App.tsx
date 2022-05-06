@@ -20,9 +20,11 @@ import { CenterPiece } from './components/layout/CenterPiece';
 import { BoardService } from './services/board.service';
 // import { ICardHand } from './models/ICardHand';
 import { CardService } from './services/card.service';
+import { DealerService } from './services/dealer.service';
 
 const boardService = new BoardService();
 const cardService = new CardService();
+const dealerService = new DealerService();
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
@@ -40,7 +42,7 @@ function App() {
     return !state.isPlayerTurn && !isBoardFull && cardService.handHasCards(state.opponentHand);
   }
   const onDeckSelected = (deck: ICardDeck) => dispatch({type: 'setDeck', payload: {deck, view: 'select-cards'}});
-  const onStartGame = () => dispatch({type: 'startGame'});
+  const onStartGame = () => dispatch({type: 'startGame', payload: {opponentCards: dealerService.getHand(state.deck.cards)}});
   const onPlayerCardClick = (index: number) => dispatch({type: 'setActiveCardInHand', payload: {handType: 'playerHand', index}});
   const onBoardCellClick = (position: [number, number]) => {
     if (state.isPlayerTurn && cardService.handHasCards(state.playerHand)) {

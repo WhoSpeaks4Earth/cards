@@ -28,7 +28,7 @@ export class DealerService {
     for (let i = 0; i < GAME_SETTINGS.MAX_CARDS_PER_HAND; i++)
       styles.push({
         position: 'relative',
-        top: (-100 * i),
+        top: (-20 * i),
         left: DealerService.#getRandomRange(20),
         transform: `rotateZ(${DealerService.#getRandomRange(2)}deg)`
     })
